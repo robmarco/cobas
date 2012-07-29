@@ -1,0 +1,42 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span class="mws-i-24 i-table-1">Listado de Usuarios</span>
+	</div>
+	
+	<div class="mws-panel-body">
+		<table class="mws-datatable-fn mws-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Email</th>
+					<th>Rol</th>
+					<th>Creado a</th>
+					<th>Último acceso</th>
+					<th>A</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<tr class="register_<%= user.id %>">
+						<td><%= user.id %></td>
+						<td><%= user.email %></td>
+						<td><%= user.is_admin? ? "Administrador" : "Normal" %></td>
+						<td><%= user.created_at.strftime("%d/%m/%Y") %></td>
+						<td><%= user.last_sign_in_at.present? ? user.last_sign_in_at.strftime("%d/%m/%Y") : "No ha accedido nunca" %></td>
+						
+						<td style="width: 60px">
+							<%= link_to image_tag("icons/16/trash.png"), userlist_destroy_path(user), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" unless user.is_admin?%>
+						</td>
+					</tr>	
+				<% end %>
+				
+			</tbody>
+		</table>
+	</div>
+	<div class="mws-report-container clearfix" style="margin: 25px 0 0 0">
+		<%= link_to 'Registrar Usuario', new_user_registration_path, :class => "mws-report-2 mws-button red medium" %>	
+	</div>
+	
+</div>
+
+

@@ -1,0 +1,82 @@
+<div class="mws-report-container clearfix">
+	<a class="mws-report" href="<%= root_path %>">
+  	<span class="mws-report-icon mws-ic ic-book"></span>
+    <span class="mws-report-content">
+    	<span class="mws-report-title">Escritos<br></span>
+    	<span class="mws-report-value"><%= @registers %></span>
+    </span>
+  </a>
+
+  <a class="mws-report" href="<%= responds_index_path %>">
+  	<span class="mws-report-icon mws-ic ic-book-go"></span>
+    <span class="mws-report-content">
+    	<span class="mws-report-title">Respuestas<br></span>
+    	<span class="mws-report-value"><%= @responds.size %></span>
+    </span>
+  </a>
+
+  <a class="mws-report" href="<%= files_index_path %>">
+  	<span class="mws-report-icon mws-ic ic-document-check-compatibility"></span>
+    <span class="mws-report-content">
+    	<span class="mws-report-title">Ficheros subidos<br></span>
+    	<span class="mws-report-value"><%= @files %></span>
+    </span>
+  </a>
+
+</div>
+
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span class="mws-i-24 i-table-1">Listado de Respuestas recibidas</span>
+	</div>
+	
+	<div class="mws-panel-body">
+		<table class="mws-datatable-fn mws-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Fecha</th>
+					<th>Contenido</th>
+					<th>F</th>
+					<th>A</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @responds.each do |r| %>
+					<tr class="register_<%= r.id %>">
+						<td style="width: 60px">R<%= r.id %></td>
+						<td style="width: 60px"><%= r.date_respond.strftime("%d/%m/%Y") %></td>
+						<td>
+							<p>Respuesta de <b><%= link_to "#{r.register.who}", register_path(r.register)+"#respond_id#{r.id}" %></b><br><i>Nº registro salida: <%= r.number_quit.present? ? r.number_quit : "No asignado" %></i></p>
+							<p><%= r.description %></p>
+							<div class="associated_files"></div>
+						</td>
+						<td style="width:10px">
+              <% if r.assets.empty? %>
+                <center>-</center>
+              <% else %>
+                <center><%= link_to image_tag("icons/16/page_white_text.png"), :title => "Editar" %></center>
+              <% end %>
+            </td>
+						<td style="width: 60px">
+							<%= link_to image_tag("icons/16/view.png"), register_path(r.register)+"#respond_id#{r.id}", :title => "Ver" %>
+							<% if current_user.admin? %>
+							<%= link_to image_tag("icons/16/cog.png"), edit_register_respond_path(r.register.id, r), :title => "Editar" %>
+							<%= link_to image_tag("icons/16/trash.png"), register_respond_path(r.register.id, r), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" %>
+							<% end %>
+						</td>
+					</tr>	
+				<% end %>
+				
+			</tbody>
+		</table>
+	</div>
+	<% if current_user.admin? %>
+	<div class="mws-report-container clearfix" style="margin: 25px 0 0 0">
+		<%= link_to 'Añadir Escrito', new_register_path, :class => "mws-report-2 mws-button red medium" %>	
+	</div>
+	<% end %>
+	
+</div>
+
+

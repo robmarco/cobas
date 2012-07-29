@@ -1,0 +1,81 @@
+<%= form_for(@register, :html => { :id => "mws-validate", :class => "mws-form", :multipart => "true"}) do |f| %>
+  <% if @register.errors.any? %>
+
+    <div id="mws-validate-error" class="mws-form-message error" style="">
+      <p><%= pluralize(@register.errors.count, "error") %> prohibited this register from being saved: </p><br>
+      <ul>
+      <% @register.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mws-form-inline">
+    <div class="mws-form-row">
+      <%= f.label :who, "Dirigido a" %>
+      <div class="mws-form-item large">
+        <%= f.text_field :who, :class => "mws-textinput required" %>
+      </div>
+    </div>
+    <div class="mws-form-row">
+      <%= f.label :date_register, "Fecha" %>
+      <div class="mws-form-item large">
+        <% if params[:action].eql? "edit" %>
+          <%= f.text_field :date_register, :value => @register.date_register.strftime("%d/%m/%Y"), :class => "mws-textinput dateESP required" %>
+        <% else %>
+          <%= f.text_field :date_register, :class => "mws-textinput dateESP required", :placeholder => "Formato dd/mm/aaaa" %>
+        
+        <% end %>
+      </div>
+    </div>
+    <div class="mws-form-row">
+      <%= f.label :number_enter, "Registro de entrada" %>
+      <div class="mws-form-item large">
+        <%= f.text_field :number_enter, :class => "mws-textinput" %>
+      </div>
+    </div>
+    <div class="mws-form-row">
+      <%= f.label :description, :Reseña %>
+      <div class="mws-form-item large">
+        <%= f.text_area :description, :class => "required" %>
+      </div>
+    </div>
+    <div class="mws-form-row">
+      <%= f.label :time_respond, "Plazo respuesta" %>
+      <div class="mws-form-item small">
+        <%= f.select :time_respond, [['Respuesta en 15 días', '15'], ['Respuesta en 30 días', '30'], ['Respuesta en 90 días', '90']] %>
+      </div>
+    </div>        
+
+    <hr>
+    <div class="mws-form-row files_row">
+      <h4>Ficheros adjuntos</h4>
+    </div>
+    
+    <div class="mws-form-row">
+    <%= f.fields_for :avatars do |a| %>
+      <% unless a.object.new_record? %>        
+            <p class="file_added"><%= link_to "#{a.object.avatar_file_name}", a.object.avatar.url %> (<%= a.check_box :_destroy %> Eliminar)</p>
+      <% end %>
+    <% end %>
+    </div>
+
+    <%= f.fields_for :avatars do |a| %>
+      <% if a.object.new_record? %>
+        <div class="mws-form-row">
+          <%= a.label :avatar, "Añadir fichero" %>
+          <div class="mws-form-item small">
+            <%= a.file_field :avatar, :class => "avatar mws-textinput" %>
+          </div>        
+        </div> 
+      <% end %>      
+    <% end %>
+
+    <br>
+
+  </div>
+  <div class="mws-button-row">
+    <%= f.submit "Enviar",  :class => "mws-button red" %>
+  </div>
+<% end %>

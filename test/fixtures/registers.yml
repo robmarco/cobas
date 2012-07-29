@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  who: MyText
+  date_register: 2012-07-24 12:48:31
+  description: MyText
+  number_enter: MyString
+  time_respond: 1
+
+two:
+  who: MyText
+  date_register: 2012-07-24 12:48:31
+  description: MyText
+  number_enter: MyString
+  time_respond: 1

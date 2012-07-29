@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Cobas" %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+  </head>
+  <body>
+    <%= yield %>
+
+    <% if alert %>
+      <div id="jGrowl" class="bottom-right jGrowl">
+        <div class="jGrowl-notification"></div>
+        <div class="jGrowl-notification ui-state-highlight ui-corner-all default" style="display: block; ">
+          <div class="jGrowl-header"></div>
+          <div class="jGrowl-message"><%= alert %></div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if resource.errors.present? %>
+      <% resource.errors.each do |key, value| %>
+      <div id="jGrowl" class="bottom-right jGrowl">
+        <div class="jGrowl-notification"></div>
+        <div class="jGrowl-notification ui-state-highlight ui-corner-all default" style="display: block; ">
+          <div class="jGrowl-header"></div>
+          <div class="jGrowl-message"><%= key %> <%= value %></div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+    
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+
+  </body>
+</html>

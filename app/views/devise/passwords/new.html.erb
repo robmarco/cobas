@@ -1,0 +1,25 @@
+<div id="mws-login" class="mws-password_new">
+  <h1>¿Olvidastes la contraseña?</h1>
+  <div class="mws-login-lock">
+    <%= image_tag "icons/24/locked-2.png" %>
+  </div>
+  <div id="mws-login-form">
+
+  	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "mws-form"}) do |f| %>
+
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+        	<%= f.email_field :email, :class => "mws-login-username mws-textinput", :placeholder => "introduce tu email" %>
+        </div>
+      </div>
+
+      <div class="mws-form-row">
+      	<%= f.submit "Enviar email con instrucciones", :class => "mws-button green mws-login-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="shared">
+  	<%= link_to "Identificarse", new_user_session_path %>
+  </div>  
+</div>

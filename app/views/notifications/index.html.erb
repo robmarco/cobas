@@ -1,0 +1,59 @@
+<div class='mws-panel grid_<%= current_user.admin? ? "5" : "8" %>'>
+  <div class="mws-panel-header">
+    <span class="mws-i-24 i-table-1">Listado de Notificaciones</span>
+  </div>
+  
+  <div class="mws-panel-body">
+    <table class="mws-datatable-fn mws-table">
+      <thead>
+        <tr>
+          <th style="width: 30px">ID</th>
+          <th style="width: 30px">Fecha</th>
+          <th>A quién</th>          
+          <th>Descripción</th>
+          <th>F</th>
+          <th>A</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notifications.each do |notification| %>
+          <tr class="notification_<%= notification.id %>">
+            <td>N<%= notification.id %></td>
+            <td><%= notification.date_notification.strftime("%d/%m/%Y") %></td>
+            <td><%= notification.who %></td>
+            <td>
+              <p><%= notification.description %></p>
+            </td>
+            <td style="width:10px">
+              <% if notification.notification_file? %>
+                <center><%= link_to image_tag("icons/16/page_white_text.png"), notification.notification_file.url, :target => '#', :title => "Editar" %></center>
+              <% else %>
+                <center>-</center>
+              <% end %>
+            </td>
+            <td style="width: 60px">
+              <% if current_user.admin? %>
+              <%= link_to image_tag("icons/16/cog.png"), edit_notification_path(notification), :title => "Editar" %>
+              <%= link_to image_tag("icons/16/trash.png"), notification, :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" %>
+              <% end %>
+            </td>
+          </tr> 
+        <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+<% if current_user.admin? %>
+<div class="mws-panel grid_3">
+  <div class="mws-panel-header">
+    <span class="mws-i-24 i-table-1">Añadir Notificación</span>
+  </div>
+
+  <div class="mws-panel-body">
+    <%= render 'form' %>
+  </div>
+</div>
+<% end %>

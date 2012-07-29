@@ -1,0 +1,37 @@
+<div id="mws-login" class="mws-register">
+  <h1>Cambiar contraseña</h1>
+  <div class="mws-login-lock">
+    <%= image_tag "icons/24/locked-2.png" %>
+  </div>
+  <div id="mws-login-form">
+
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "mws-form"}) do |f| %>
+
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+          <%= f.password_field :password, :class => "mws-login-password mws-textinput", :placeholder => "nueva contraseña" %>
+        </div>
+      </div>
+      
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+          <%= f.password_field :password_confirmation, :class => "mws-login-password mws-textinput", :placeholder => "confirmación nueva contraseña" %>
+        </div>
+      </div>
+
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+          <%= f.password_field :current_password, :class => "mws-login-password mws-textinput", :placeholder => "contraseña actual" %>
+        </div>
+      </div>
+
+      <div class="mws-form-row">
+        <%= f.submit "Modificar", :class => "mws-button green mws-login-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="shared">
+    <%= link_to "Ir Atrás", root_path %>
+  </div>  
+</div>

@@ -1,0 +1,138 @@
+<div class="mws-panel grid_5">
+  <div class="mws-panel-header">
+    <span class="mws-i-24 i-single-document">Escrito</span>
+  </div>
+  <div class="mws-panel-body">
+    <div class="mws-panel-content">
+      <h3><%= @register.who %></h3>
+      <p><%= @register.description %></p>
+    </div>
+  </div>
+  <div class="mws-panel-body mws-footer-row">
+    <div class="files_title grid_4">Ficheros adjuntos</div>
+    <div class="files_body grid_4">
+      <% if @files.count > 0 %>
+        <ul class="files">
+          <% @files.each do |file| %>
+            <li><%= link_to file.avatar_file_name, file.avatar.url %></li>
+          <% end %>
+        </ul>        
+      <% else %>
+        <ul class="files">No hay ficheros adjuntos</li></ul>
+      <% end %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+<div class="mws-panel grid_3">
+  <div class="mws-panel-header">
+    <span class="mws-i-24 i-books-2">Detalles</span>
+  </div>
+  <div class="mws-panel-body">
+    <ul class="mws-summary">
+      <li>
+        <div class="grid_2 li_element">Identificador</div>
+        <div class="grid_6"><span><%= @register.id %></span></div>         
+      </li>
+      <li>
+        <div class="grid_2 li_element">Fecha emisión</div>
+        <div class="grid_6"><span><%= @register.date_register.strftime("%d/%m/%Y") %></span></div>
+      </li>      
+      <li>
+        <div class="grid_2 li_element">Registro entrada</div>
+        <div class="grid_6"><span><%= @register.number_enter.present? ? @register.number_enter : "No asignado"  %></span></div>         
+      </li>
+      <li>
+        <div class="grid_2 li_element">Plazo respuesta</div>
+        <div class="grid_6"><span><%= @register.time_respond %> días</span></div>
+      </li>
+      <li>
+        <div class="grid_2 li_element">Faltan</div>
+        <div class="grid_6">
+          <% if @register.responds.count > 0 %>
+            <span class="sidebar green_flag">Respondido</span>
+          <% else %>
+            <%= raw days_until_response_sidebar(@register.days_until_respond) %>  
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<h3><%= pluralize(@responds.count, "Respuestas") %></h3>
+
+<% if @responds.count > 0 %>
+  <% @responds.each do |r| %>
+    <div class="mws-panel grid_5" id="respond_id<%= r.id %>">
+      
+      <div class="mws-panel-header">
+        <div class="grid_5">
+          <span class="mws-i-24 i-bended-arrow-right">
+            Respuesta - <%= r.date_respond.strftime("%d/%m/%Y") %> <%= "(Registro salida nº #{r.number_quit})"  if r.number_quit.present? %>
+          </span>
+        </div>
+        <div class="grid_3 link_respond">
+          ID R<%= r.id %>
+          <% if current_user.admin? %>
+          <%= link_to 'Editar', edit_register_respond_path(@register, r), :class => "mws-button red small" %>
+          <% end %>
+        </div>
+        
+        
+      </div>
+
+      <div class="mws-panel-body">
+        <div class="mws-panel-content">
+          <p><%= r.description %></p>
+        </div>
+      </div>
+<% if r.assets.count > 0 %>
+      <div class="mws-panel-body mws-footer-row">
+        <div class="files_title grid_4">Ficheros adjuntos</div>
+        <div class="files_body grid_4">
+          
+            <ul class="files">
+              <% r.assets.each do |file| %>
+                <li><%= link_to file.asset_file_name, file.asset.url %></li>
+              <% end %>
+            </ul>        
+          
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <% end %>
+
+    </div>
+  <% end %>
+  <div class="clearfix"></div>
+<% end %>
+
+<% if current_user.admin? %>
+<hr>
+<h3>Añadir respuesta</h3>
+
+<div class="mws-panel grid_5">
+  <div class="mws-panel-header">
+      <span class="mws-i-24 i-list">Rellene el formulario</span>
+    </div>
+    <div class="mws-panel-body">
+      <%= render "responds/form" %>
+    </div>      
+</div>
+<% end %>
+
+<div class="clearfix"></div>
+<div class="mws-report-container clearfix">
+  <%= link_to 'Ir Atrás', registers_path, :class => "mws-report-2 mws-button red medium" %> 
+
+  <% if current_user.admin? %>
+  <%= link_to 'Editar', edit_register_path(@register), :class => "mws-report-2 mws-button red medium" %> 
+  <%= link_to 'Añadir Escrito', new_register_path, :class => "mws-report-2 mws-button red medium" %> 
+  <% end %>
+</div>
+
+

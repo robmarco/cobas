@@ -1,0 +1,164 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require reset
+ *= require text
+ *= require fonts/ptsans/stylesheet
+ *= require fluid
+ *= require mws.style
+ *= require jquery.jgrowl
+ *= require mws.theme
+ *= require icons/icons
+ *= require_self
+ */
+
+/* --- Devise views --- */
+
+div#mws-login.mws-register { height: 318px; }
+div#mws-login.mws-password_new { height: 180px; }
+
+.shared { margin-top: 10px;}
+.shared a {
+  color: white;
+  text-decoration: none;
+}
+
+/* --- Other stuff --- */
+
+a.file_link, a:visited.file_link {
+  color: #D46A6F;
+  text-decoration: none;
+}
+
+a:hover.file_link {
+  text-decoration: underline;
+}
+
+td > p > b > a, td > p > b > a:visited {
+  color: #D46A6F;
+  text-decoration: none;
+}
+
+td > p > b > a:hover {
+  text-decoration: underline;
+}
+
+.mws-report-2 {
+  margin:8px 0px 1% 1%;
+  float:left;
+  cursor:pointer;
+  display:block;
+  text-decoration:none;
+  
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+ul.mws-summary li {
+	padding-left: 15px;
+}
+
+ul.mws-summary li span {
+	margin-left: 20px;
+	text-align: left;
+}
+
+div.mws-form-row.files_row > h4 { 
+  padding: 0;
+  margin: 0;
+}
+
+.file_added {
+  margin: 0px;
+  padding: 0;
+}
+
+p.file_added > a {
+  color: #D46A6F;
+  text-decoration: none;
+}
+
+p.file_added > a:hover{
+  text-decoration: underline;
+}
+
+.mws-footer-row {
+  padding: 16px 24px;
+  border: 1px solid #BCBCBC;
+  background: url(core/mws-inset.png);
+}
+
+ul.files {
+  margin-bottom: 0px;
+  font-family: 'PTSansRegular', Arial, Helvetica, sans-serif;
+}
+
+ul.files > li {
+  list-style: url(icons/16/link.png);
+}
+
+ul.files > li > a { 
+  color: black;
+  text-decoration: none;
+}
+
+ul.files > li > a:hover {
+  color: #D46A6F;
+  text-decoration: none;
+}
+
+.files_title {
+  font-family: 'PTSansRegular', Arial, Helvetica, sans-serif;
+  color: #666;
+}
+
+.link_respond {
+  text-align: right;
+  color: #D46A6F;
+}
+
+/*  --- Errors  --- */ 
+
+#notice, #error, #alert, #error2 { padding: 5px 8px; margin: 0 0 20px 0; }
+#notice { background-color: #CFC; border: solid 1px #6C6; }
+#error2 { background-color: #FCC; border: solid 1px #C66; text-align: justify; }
+#error, #alert { background-color: #FCC; border: solid 1px #C66; text-align: center; }
+
+/*  --- Flags  --- */ 
+
+.li_element {
+  padding-top: 12px;
+}
+
+span.flag { 
+  display: block;
+  padding: 1px 10px 1px 10px; 
+  text-align: center;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.red_flag { background: #fa8c8c; }
+.green_flag { background: #95fc80; }
+.orange_flag { background: #f5bb47; }
+.yellow_flag { background: #fafa69; }
+
+ul.mws-summary > li > div.grid_6 > span.sidebar { 
+  font-size: 20px;
+  width: 100px;
+  padding: 2px 10px 2px 10px;
+  margin: 5px 0 5px 20px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+}

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date_respond: 
+  description: MyText
+  number_quit: MyString
+  register_id: 1
+
+two:
+  date_respond: 
+  description: MyText
+  number_quit: MyString
+  register_id: 1

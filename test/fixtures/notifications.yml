@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  who: MyString
+  date_notification: 2012-07-27
+  description: MyText
+
+two:
+  who: MyString
+  date_notification: 2012-07-27
+  description: MyText

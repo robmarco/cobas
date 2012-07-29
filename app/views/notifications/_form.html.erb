@@ -1,0 +1,81 @@
+<%= form_for(@notification, :html => { :id => "mws-validate", :class => "mws-form", :multipart => true }) do |f| %>
+  <% if @notification.errors.any? %>
+
+    <div id="mws-validate-error" class="mws-form-message error" style="">
+      <p><%= pluralize(@notification.errors.count, "error") %> prohibited this register from being saved: </p><br>
+      <ul>
+      <% @notification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="mws-form-inline">
+    
+    <div class="mws-form-row">
+      <%= f.label :who, "Dirigido a" %>
+      <div class="mws-form-item large">
+        <%= f.text_field :who, :class => "mws-textinput required" %>
+      </div>
+    </div>
+
+    <div class="mws-form-row">
+      <%= f.label :date_notification, "Fecha" %>
+      <div class="mws-form-item">
+        <% if params[:action].eql? "edit" %>
+
+          <%= f.text_field :date_notification, :value => "#{@notification.date_notification.strftime('%d/%m/%Y')}", :class => "mws-textinput dateESP required", :placeholder => "Formato dd/mm/aaaa" %>
+        <% else %>
+          <%= f.text_field :date_notification, :class => "mws-textinput dateESP required", :placeholder => "Formato dd/mm/aaaa" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mws-form-row">
+      <%= f.label :description, "Descripción" %>
+      <div class="mws-form-item">
+        <%= f.text_area :description, :class => "required" %>
+      </div>
+    </div>
+
+    <% if params[:action].eql? "edit" %>
+      <hr>
+      <div class="mws-form-row files_row">
+        <h4>Fichero adjunto</h4>
+        <span><i>Únicamente se permite un fichero por notificación. Si se adjunta otor fichero cuando ya existe uno, automáticamente se borrará el menos reciente.</i></span>
+      </div>    
+
+      <% if @notification.notification_file? %>
+      <div class="mws-form-row">
+        <p class="file_added"><%= link_to "#{f.object.notification_file_file_name}", '#' %></p>
+      </div>
+      <% end %>
+
+      <div class="mws-form-row">
+        <%= f.label :notification_file, "Fichero adjunto" %>
+        <div class="mws-form-item">
+          <%= f.file_field :notification_file %>
+        </div>
+      </div>
+    
+    <% else %>
+      <div class="mws-form-row">
+        <%= f.label :notification_file, "Fichero adjunto" %>
+        <div class="mws-form-item">
+          <%= f.file_field :notification_file %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  
+  <div class="mws-button-row">
+    <% if params[:action].eql? "edit" %>
+      <%= f.submit "Editar", :class => "mws-button red" %>
+    <% else %>
+      <%= f.submit "Añadir", :class => "mws-button red" %>
+    <% end %>
+  </div>
+<% end %>

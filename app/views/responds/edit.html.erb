@@ -1,0 +1,78 @@
+<div class="mws-panel grid_8">
+  <div class="mws-panel-header">
+    <span class="mws-i-24 i-single-document">Editar Respuesta</span>
+  </div>
+  <div class="mws-panel-body">
+    <div class="mws-panel-content">
+      
+    	<%= form_for([@register, @respond], :html => { :id => "mws-validate", :class => "mws-form" }) do |f| %>
+			  <div class="mws-form-inline">
+			    <div class="mws-form-row">
+			      <%= f.label :date_respond, "Fecha" %>
+			      <div class="mws-form-item large">
+			      	<% if params[:action].eql? "edit" %>
+          			<%= f.text_field :date_respond, :value => @respond.date_respond.strftime("%d/%m/%Y"), :class => "mws-textinput dateESP required" %>
+        			<% else %>
+          			<%= f.text_field :date_respond, :class => "mws-textinput dateESP required" %>
+        			<% end %>
+			      </div>
+			    </div>
+			  </div>
+
+			  <div class="mws-form-inline">
+			    <div class="mws-form-row">
+			      <%= f.label :number_quit, "Registro salida" %>
+			      <div class="mws-form-item large">
+			        <%= f.text_field :number_quit, :class => "mws-textinput" %>
+			      </div>
+			    </div>
+			  </div>
+
+			  <div class="mws-form-inline">
+			    <div class="mws-form-row">
+			      <%= f.label :description, "Reseña" %>
+			      <div class="mws-form-item large">
+			        <%= f.text_area :description, :class => "required" %>
+			      </div>
+			    </div>
+			  </div>
+
+			  <hr>
+		    
+		    <div class="mws-form-row files_row">
+		      <h4>Ficheros adjuntos</h4>
+		    </div>
+			  
+			  <div class="mws-form-row">
+    			<%= f.fields_for :assets do |a| %>
+			      <% unless a.object.new_record? %>        
+			      <p class="file_added"><%= link_to "#{a.object.asset_file_name}", a.object.asset.url %> (<%= a.check_box :_destroy %> Eliminar)</p>
+			      <% end %>
+			    <% end %>
+    		</div>
+
+    		<div class="mws-form-inline">
+			    <%= f.fields_for :assets do |a| %>
+			    	<% if a.object.new_record? %>
+					    <div class="mws-form-row">
+					      <%= a.label "Añadir fichero" %>
+					      <div class="mws-form-item large">
+					        <%= a.file_field :asset %>
+					      </div>
+					    </div>
+			    	<% end %>
+			    <% end %>
+			  </div>
+
+			  <div align="right"><%= f.submit "Enviar", :class => "mws-button gray medium" %></div>
+			<% end %>
+
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="mws-report-container clearfix">
+  <%= link_to 'Ir Atrás', registers_path, :class => "mws-report-2 mws-button red medium" %> 
+  <%= link_to 'Eliminar Respuesta', register_respond_path(@register, @respond), :method => :delete, :confirm => "¿Estás seguro?", :class => "mws-report-2 mws-button red medium" %> 
+</div>

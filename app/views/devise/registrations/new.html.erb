@@ -1,0 +1,39 @@
+<div id="mws-login" class="mws-register">
+  <h1>Registrarse</h1>
+  <div class="mws-login-lock">
+    <%= image_tag "icons/24/locked-2.png" %>
+  </div>
+  <div id="mws-login-form">
+
+  	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "mws-form"}) do |f| %>
+
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+        	<%= f.email_field :email, :class => "mws-login-username mws-textinput", :placeholder => "email" %>
+        </div>
+      </div>
+      
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+        	<%= f.password_field :password, :class => "mws-login-password mws-textinput", :placeholder => "contraseña" %>
+        </div>
+      </div>
+      
+      <div class="mws-form-row">
+        <div class="mws-form-item large">
+        	<%= f.password_field :password_confirmation, :class => "mws-login-password mws-textinput", :placeholder => "confirmación contraseña" %>
+        </div>
+      </div>
+
+      <div class="mws-form-row">
+      	<%= f.submit "Registrarse", :class => "mws-button green mws-login-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="shared">
+  	<%= link_to 'Ir Atrás', :back %>
+  </div>  
+
+</div>
+
