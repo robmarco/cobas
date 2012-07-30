@@ -15,7 +15,7 @@
  *= require mws.style
  *= require jquery.jgrowl
  *= require mws.theme
- *= require icons/icons
+ *= require core/icons
  *= require_self
  */
 
