@@ -29,7 +29,7 @@
 	      <% if register.avatars.count > 0 %>
 	        <ul class="files">
 	          <% register.avatars.each do |file| %>
-	            <li><%= link_to file.avatar_file_name, file.avatar.url %></li>
+	            <li><%= link_to file.avatar_file_name, download_register(@dossier,file) %></li>
 	          <% end %>
 	        </ul>        
 	      <% else %>

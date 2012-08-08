@@ -74,4 +74,10 @@ class RegistersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def download
+    @avatar = Avatar.find(params[:avatar_id])
+    redirect_to @avatar.avatar.expiring_url(10)
+  end
+
 end
