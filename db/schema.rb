@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120729201050) do
-
-  create_table "assets", :force => true do |t|
-    t.string   "asset_file_name"
-    t.string   "asset_content_type"
-    t.integer  "asset_file_size"
-    t.datetime "asset_updated_at"
-    t.integer  "respond_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120808001326) do
 
   create_table "avatars", :force => true do |t|
     t.string   "avatar_file_name"
@@ -31,6 +21,26 @@ ActiveRecord::Schema.define(:version => 20120729201050) do
     t.integer  "register_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "dossiers", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "state"
+  end
+
+  create_table "intern_notifications", :force => true do |t|
+    t.date     "date_intern"
+    t.string   "who"
+    t.text     "description"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "intern_notification_file_file_name"
+    t.string   "intern_notification_file_content_type"
+    t.integer  "intern_notification_file_file_size"
+    t.datetime "intern_notification_file_updated_at"
   end
 
   create_table "notifications", :force => true do |t|
@@ -53,15 +63,8 @@ ActiveRecord::Schema.define(:version => 20120729201050) do
     t.integer  "time_respond"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "responds", :force => true do |t|
-    t.date     "date_respond"
-    t.text     "description"
-    t.string   "number_quit"
-    t.integer  "register_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "dossier_id"
+    t.string   "type_document"
   end
 
   create_table "users", :force => true do |t|

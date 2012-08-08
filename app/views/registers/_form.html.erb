@@ -1,4 +1,4 @@
-<%= form_for(@register, :html => { :id => "mws-validate", :class => "mws-form", :multipart => "true"}) do |f| %>
+<%= form_for([@dossier, @register], :html => { :id => "mws-validate", :class => "mws-form", :multipart => "true"}) do |f| %>
   <% if @register.errors.any? %>
 
     <div id="mws-validate-error" class="mws-form-message error" style="">
@@ -10,10 +10,17 @@
       </ul>
     </div>
   <% end %>
-
+  <br>
   <div class="mws-form-inline">
     <div class="mws-form-row">
-      <%= f.label :who, "Dirigido a" %>
+      <%= f.label :type_document, "Tipo de escrito" %>
+      <div class="mws-form-item large">
+        <%= f.select :type_document, [['Entrada', 'Entrada'], ['Salida', 'Salida']] %>
+      </div>
+    </div>
+
+    <div class="mws-form-row">
+      <%= f.label :who, "A/De" %>
       <div class="mws-form-item large">
         <%= f.text_field :who, :class => "mws-textinput required" %>
       </div>
@@ -30,7 +37,7 @@
       </div>
     </div>
     <div class="mws-form-row">
-      <%= f.label :number_enter, "Registro de entrada" %>
+      <%= f.label :number_enter, "Nº de Registro" %>
       <div class="mws-form-item large">
         <%= f.text_field :number_enter, :class => "mws-textinput" %>
       </div>
@@ -44,7 +51,7 @@
     <div class="mws-form-row">
       <%= f.label :time_respond, "Plazo respuesta" %>
       <div class="mws-form-item small">
-        <%= f.select :time_respond, [['Respuesta en 15 días', '15'], ['Respuesta en 30 días', '30'], ['Respuesta en 90 días', '90']] %>
+        <%= f.select :time_respond, [['Respuesta en 15 días', '15'], ['Respuesta en 30 días', '30'], ['Respuesta en 90 días', '90'], ['No necesita respuesta', '-1']] %>
       </div>
     </div>        
 

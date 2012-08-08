@@ -9,11 +9,11 @@
 
 </div>
 <div class="mws-report-container clearfix">
-	<%= link_to 'Nuevo Escrito', new_register_path, :class => "mws-report-2 mws-button red medium" %>
+	<%= link_to 'Nuevo Escrito', new_dossier_register_path(@dossier), :class => "mws-report-2 mws-button red medium" %>
 
-	<%= link_to 'Ir Atras', registers_path, :class => "mws-report-2 mws-button red medium" %>	
+	<%= link_to 'Ir Atras', :back, :class => "mws-report-2 mws-button red medium" %>	
 
-	<%= link_to 'Ver Escrito', @register, :class => "mws-report-2 mws-button red medium" %>
+	<%= link_to 'Ver Escrito', @dossier, :class => "mws-report-2 mws-button red medium" %>
 
-	<%= link_to 'Eliminar', @register, :method => :delete, :confirm => "¿Estás seguro?", :class => "mws-report-2 mws-button gray medium" %>
+	<%= link_to 'Eliminar', dossier_register_path(@dossier,@register), :method => :delete, :confirm => "¿Estás seguro?", :class => "mws-report-2 mws-button gray medium" %>
 </div>

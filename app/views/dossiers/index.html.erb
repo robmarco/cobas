@@ -1,0 +1,56 @@
+<%= render 'layouts/indexes_header' %>
+
+<div class="mws-panel grid_8">
+  <div class="mws-panel-header">
+    <span class="mws-i-24 i-table-1">Listado de Expedientes gestionados</span>
+  </div>
+  
+  <div class="mws-panel-body">
+    <table class="mws-datatable-fn mws-table">
+      <thead>
+        <tr>
+          <th style="width: 30px;">ID</th>
+          <th>Contenido</th>
+          <th>Estado</th>
+          <th>Plazo</th>
+          <th style="width: 70px;">Faltan</th>
+          <th>A</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @dossiers.each do |d| %>
+          <tr class="register_<%= d.id %>">
+            <td>E<%= d.id %></td>
+            <td>
+              <p>
+                <b><%= link_to "#{d.title}", dossier_path(d) %></b><br>
+                <i><%= d.description %></i>
+              </p>
+            </td>
+            <td style="width: 50px;"><%= d.state %></td>
+            <td style="width: 40px;">30 días</td>
+            <td style= "width: 60px;"> 
+              7 días
+            </td>
+            <td style="width: 60px">
+              <%= link_to image_tag("icons/16/view.png"), dossier_path(d), :title => "Ver" %>
+              <% if current_user.admin? %>
+              <%= link_to image_tag("icons/16/cog.png"), edit_dossier_path(d), :title => "Editar" %>
+              <%= link_to image_tag("icons/16/trash.png"), dossier_path(d), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" %>
+              <% end %>
+            </td>
+          </tr> 
+        <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+  <% if current_user.admin? %>
+  <div class="mws-report-container clearfix" style="margin: 25px 0 0 0;">
+    <%= link_to 'Añadir Expediente', new_dossier_path, :class => "mws-report-2 mws-button red medium" %>  
+  </div>
+  <% end %>
+  
+</div>
+
+

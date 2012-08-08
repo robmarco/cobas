@@ -1,0 +1,35 @@
+<%= form_for(@dossier, :html => { :id => "mws-validate", :class => "mws-form"}) do |f| %>
+
+  <% if @dossier.errors.any? %>
+    <div id="mws-validate-error" class="mws-form-message error" style="">
+      <p><%= pluralize(@dossier.errors.count, "error") %> prohibited this register from being saved: </p><br>
+      <ul>
+      <% @dossier.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mws-form-inline">
+    <div class="mws-form-row">
+      <%= f.label :title, "Título" %>
+      <div class="mws-form-item large">
+        <%= f.text_field :title, :class => "mws-textinput required" %>
+      </div>
+    </div>
+
+    <div class="mws-form-row">
+      <%= f.label :description, "Reseña" %>
+      <div class="mws-form-item large">
+        <%= f.text_area :description, :class => "required" %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mws-button-row">
+    <%= f.submit "Enviar",  :class => "mws-button red" %>
+  </div>
+
+<% end %>

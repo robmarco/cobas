@@ -1,0 +1,25 @@
+<div class="mws-report-container clearfix">
+  <a class="mws-report" href="<%= root_path %>">
+    <span class="mws-report-icon mws-ic ic-book"></span>
+    <span class="mws-report-content">
+      <span class="mws-report-title">Expedientes<br></span>
+      <span class="mws-report-value"><%= Dossier.all.size %></span>
+    </span>
+  </a>
+
+  <a class="mws-report" href="<%= registers_path %>">
+    <span class="mws-report-icon mws-ic ic-book-go"></span>
+    <span class="mws-report-content">
+      <span class="mws-report-title">Escritos<br></span>
+      <span class="mws-report-value"><%= Register.all.size %></span>
+    </span>
+  </a>
+
+  <a class="mws-report" href="<%= files_index_path %>">
+    <span class="mws-report-icon mws-ic ic-document-check-compatibility"></span>
+    <span class="mws-report-content">
+      <span class="mws-report-title">Ficheros subidos<br></span>
+      <span class="mws-report-value">0</span>
+    </span>
+  </a>
+</div>

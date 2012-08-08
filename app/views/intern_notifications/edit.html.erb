@@ -1,0 +1,15 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span class="mws-i-24 i-single-document">Editar notificación de régimen interno</span>
+	</div>
+
+	<div class="mws-panel-body">
+		<%= render 'form' %>
+	</div>
+
+</div>
+<div class="mws-report-container clearfix">
+	<%= link_to 'Ir Atras', intern_notifications_path, :class => "mws-report-2 mws-button red medium" %>	
+
+	<%= link_to 'Eliminar', @intern_notification, :method => :delete, :confirm => "¿Estás seguro?", :class => "mws-report-2 mws-button gray medium" %>
+</div>

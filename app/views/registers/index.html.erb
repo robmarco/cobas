@@ -1,92 +1,62 @@
-<div class="mws-report-container clearfix">
-	<a class="mws-report" href="<%= root_path %>">
-  	<span class="mws-report-icon mws-ic ic-book"></span>
-    <span class="mws-report-content">
-    	<span class="mws-report-title">Escritos<br></span>
-    	<span class="mws-report-value"><%= @registers.size %></span>
-    </span>
-  </a>
-
-  <a class="mws-report" href="<%= responds_index_path %>">
-  	<span class="mws-report-icon mws-ic ic-book-go"></span>
-    <span class="mws-report-content">
-    	<span class="mws-report-title">Respuestas<br></span>
-    	<span class="mws-report-value"><%= @responds.size %></span>
-    </span>
-  </a>
-
-  <a class="mws-report" href="<%= files_index_path %>">
-  	<span class="mws-report-icon mws-ic ic-document-check-compatibility"></span>
-    <span class="mws-report-content">
-    	<span class="mws-report-title">Ficheros subidos<br></span>
-    	<span class="mws-report-value"><%= @files %></span>
-    </span>
-  </a>
-
-</div>
+<%= render 'layouts/indexes_header' %>
 
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
 		<span class="mws-i-24 i-table-1">Listado de Escritos gestionados</span>
 	</div>
-	
+
 	<div class="mws-panel-body">
 		<table class="mws-datatable-fn mws-table">
 			<thead>
 				<tr>
-					<th style="width: 30px">ID</th>
-					<th style="width: 50px">Fecha</th>
+					<th style="width: 30px;">ID</th>
+					<th style="width: 50px;">Fecha</th>
 					<th>Contenido</th>
+					<th>Tipo</th>
 					<th>F</th>
 					<th>Plazo</th>
-					<th style="width: 70px">Faltan</th>
+					<th style="width: 70px;">Faltan</th>
 					<th>A</th>
 				</tr>
 			</thead>
 			<tbody>
 				<% @registers.each do |r| %>
 					<tr class="register_<%= r.id %>">
-						<td>E<%= r.id %></td>
+						<td><%= "E#{r.dossier.id}ID#{r.id}" %></td>
 						<td><%= r.date_register.strftime("%d/%m/%Y") %></td>
 						<td>
-							<p><b><%= link_to "#{r.who}", register_path(r) %></b><br><i>Nº registro entrada: <%= r.number_enter.present? ? r.number_enter : "No asignado" %></i></p>
+							<p><b><%= link_to "#{r.type_document.eql?("Entrada") ? "Recibido de " : "Enviado a "} #{r.who}", dossier_path(r.dossier)+"#register_id#{r.id}" %></b><br><i>Nº de Registro: <%= r.number_enter.present? ? r.number_enter : "No asignado" %></i></p>
 							<p><%= r.description %></p>
-							<div class="associated_files"></div>
 						</td>
-						<td style="width:10px">
+						<td style="width:40px;"><%= r.type_document %></td>
+						<td style="width:10px;">
 							<% if r.avatars.empty? %>
 								<center>-</center>
 							<% else %>
 								<center><%= link_to image_tag("icons/16/page_white_text.png"), '#', :title => "Editar" %></center>
 							<% end %>
 						</td>
-						<td style="width: 40px"><%= r.time_respond %> días</td>
-						<td style= "width: 60px"> 
-							<% if r.responds.count > 0 %>
-								<span class="flag green_flag">Respondido</span>
-							<% else %>
-								<%= raw days_until_response_text(r.days_until_respond) %>
-							<% end %>
+						<td style="width: 40px;"><%= r.time_respond %> días</td>
+						<td style= "width: 60px;"> 
+							<%= raw days_until_response_text(r.days_until_respond) %>
 						</td>
-						<td style="width: 60px">
-							<%= link_to image_tag("icons/16/view.png"), register_path(r), :title => "Ver" %>
+						<td style="width: 60px;">
+							<%= link_to image_tag("icons/16/view.png"), dossier_path(r.dossier)+"#register_id#{r.id}", :title => "Ver" %>
 							<% if current_user.admin? %>
-							<%= link_to image_tag("icons/16/cog.png"), edit_register_path(r), :title => "Editar" %>
-							<%= link_to image_tag("icons/16/trash.png"), register_path(r), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" %>
+							<%= link_to image_tag("icons/16/cog.png"), edit_dossier_register_path(r.dossier, r), :title => "Editar" %>
+							<%= link_to image_tag("icons/16/trash.png"), dossier_register_path(r.dossier, r), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" %>
 							<% end %>
 						</td>
 					</tr>	
 				<% end %>
-				
+
 			</tbody>
 		</table>
 	</div>
 	<% if current_user.admin? %>
-	<div class="mws-report-container clearfix" style="margin: 25px 0 0 0">
-		<%= link_to 'Añadir Escrito', new_register_path, :class => "mws-report-2 mws-button red medium" %>	
+	<div class="mws-report-container clearfix" style="margin: 25px 0 0 0;">
+		<%= link_to 'Añadir Escrito', '#', :class => "mws-report-2 mws-button red medium" %>	
 	</div>
 	<% end %>
-	
+
 </div>
-
-

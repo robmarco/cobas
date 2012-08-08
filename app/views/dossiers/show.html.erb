@@ -1,0 +1,89 @@
+<h3># E<%= @dossier.id %> - Expediente <%= @dossier.title %> - Estado: Abierto</h3>
+<hr>
+<br>
+
+<% @registers.each do |register| %>
+
+	<div class="mws-panel grid_5" id="register_id<%= register.id %>">
+	  <div class="mws-panel-header">
+	  	<div class="grid_5">
+	  		<span class="mws-i-24 i-single-document">Escrito de <%= register.type_document.downcase %></span>
+	  	</div>
+	    <div class="grid_3 link_respond">
+	    	<% if current_user.admin? %>
+	    		<%= link_to 'Editar', edit_dossier_register_path(@dossier, register), :class => "mws-button red small" %>
+	    		<%= link_to 'Eliminar', dossier_register_path(@dossier), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar", :class => "mws-button red small"  %>
+	    	<% end %>
+	    </div>
+
+	  </div>
+	  <div class="mws-panel-body">
+	    <div class="mws-panel-content">
+	      <h3><%= register.type_document.eql?("Entrada") ? "Recibido de " : "Enviado a "  %><%= register.who %></h3>
+	      <p><%= register.description %></p>
+	    </div>
+	  </div>
+	  <div class="mws-panel-body mws-footer-row">
+	    <div class="files_title grid_4">Ficheros adjuntos</div>
+	    <div class="files_body grid_4">
+	      <% if register.avatars.count > 0 %>
+	        <ul class="files">
+	          <% register.avatars.each do |file| %>
+	            <li><%= link_to file.avatar_file_name, file.avatar.url %></li>
+	          <% end %>
+	        </ul>        
+	      <% else %>
+	        <ul class="files">No hay ficheros adjuntos</li></ul>
+	      <% end %>
+	    </div>
+	    <div class="clearfix"></div>
+	  </div>
+	</div>
+
+
+	<div class="mws-panel grid_3">
+	  <div class="mws-panel-header">
+	    <span class="mws-i-24 i-books-2">Detalles</span>
+	  </div>
+	  <div class="mws-panel-body">
+	    <ul class="mws-summary">
+	      <li>
+	        <div class="grid_2 li_element">Identificador</div>
+	        <div class="grid_6"><span><%= "E#{@dossier.id}D#{register.id}" %></span></div>         
+	      </li>
+	      <li>
+	        <div class="grid_2 li_element">Fecha emisión</div>
+	        <div class="grid_6"><span><%= register.date_register.strftime("%d/%m/%Y") %></span></div>
+	      </li>      
+	      <li>
+	        <div class="grid_2 li_element">Nº de Registro</div>
+	        <div class="grid_6"><span><%= register.number_enter.present? ? register.number_enter : "No asignado"  %></span></div>         
+	      </li>
+	      <li>
+	        <div class="grid_2 li_element">Plazo respuesta</div>
+	        <div class="grid_6"><span><%= register.time_respond %> días</span></div>
+	      </li>
+	      <li>
+	        <div class="grid_2 li_element">Faltan</div>
+	        <div class="grid_6">
+            <%= raw days_until_response_sidebar(register.time_respond) %>
+	        </div>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+
+<% end %>
+
+<div class="clearfix"></div>
+<div class="mws-report-container clearfix">
+  <%= link_to 'Ir a Listado Expedientes', dossiers_path, :class => "mws-report-2 mws-button red medium" %> 
+
+  <% if current_user.admin? %>
+  <%= link_to 'Editar', edit_dossier_path(@dossier), :class => "mws-report-2 mws-button red medium" %> 
+  <%= link_to 'Añadir Escrito a Expediente', new_dossier_register_path(@dossier), :class => "mws-report-2 mws-button red medium" %> 
+  <%= link_to 'Eliminar Expediente', dossier_path(@dossier), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar", :class => "mws-report-2 mws-button gray medium" %> 
+  <% end %>
+</div>
+
+

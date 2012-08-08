@@ -1,29 +1,4 @@
-<div class="mws-report-container clearfix">
-	<a class="mws-report" href="<%= root_path %>">
-  	<span class="mws-report-icon mws-ic ic-book"></span>
-    <span class="mws-report-content">
-    	<span class="mws-report-title">Escritos<br></span>
-    	<span class="mws-report-value"><%= @registers.size %></span>
-    </span>
-  </a>
-
-  <a class="mws-report" href="<%= responds_index_path %>">
-  	<span class="mws-report-icon mws-ic ic-book-go"></span>
-    <span class="mws-report-content">
-    	<span class="mws-report-title">Respuestas<br></span>
-    	<span class="mws-report-value"><%= @responds.size %></span>
-    </span>
-  </a>
-
-  <a class="mws-report" href="<%= files_index_path %>">
-  	<span class="mws-report-icon mws-ic ic-document-check-compatibility"></span>
-    <span class="mws-report-content">
-    	<span class="mws-report-title">Ficheros subidos<br></span>
-    	<span class="mws-report-value"><%= @files %></span>
-    </span>
-  </a>
-
-</div>
+<%= render 'layouts/indexes_header' %>
 
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
@@ -40,17 +15,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% @assets.each do |file| %>
-					<tr class="file_<%= file.id %>">
-						<td><%= link_to file.asset_file_name, file.asset.url, :class => "file_link" %></td>
-						<td><%= number_to_human_size file.asset_file_size %></td>
-						<td><%= file.created_at.strftime("%d/%m/%Y") %></td>
-					</tr>	
-				<% end %>
 
 				<% @avatars.each do |file| %>
 					<tr class="file_<%= file.id %>">
-						<td><%= link_to file.avatar_file_name, file.avatar.url, :class => "file_link" %></td>
+						<td><%= link_to file.avatar_file_name, file.avatar.url, :class => "file_link", :target => '#' %></td>
 						<td><%= number_to_human_size file.avatar_file_size %></td>
 						<td><%= file.created_at.strftime("%d/%m/%Y") %></td>
 					</tr>	

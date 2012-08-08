@@ -1,6 +1,6 @@
 <div class='mws-panel grid_8'>
   <div class="mws-panel-header">
-    <span class="mws-i-24 i-table-1">Listado de Notificaciones</span>
+    <span class="mws-i-24 i-table-1">Listado de Notificaciones de Régimen Interno</span>
   </div>
   
   <div class="mws-panel-body">
@@ -9,31 +9,31 @@
         <tr>
           <th style="width: 30px;">ID</th>
           <th style="width: 30px;">Fecha</th>
-          <th>A quién</th>          
+          <th>Recibido de</th>          
           <th>Descripción</th>
           <th>F</th>
           <th>A</th>
         </tr>
       </thead>
       <tbody>
-        <% @notifications.each do |notification| %>
+        <% @intern_notifications.each do |notification| %>
           <tr class="notification_<%= notification.id %>">
-            <td>N<%= notification.id %></td>
-            <td><%= notification.date_notification.strftime("%d/%m/%Y") %></td>
+            <td>R<%= notification.id %></td>
+            <td><%= notification.date_intern.strftime("%d/%m/%Y") %></td>
             <td><%= notification.who %></td>
             <td>
               <p><%= notification.description %></p>
             </td>
             <td style="width:10px;">
-              <% if notification.notification_file? %>
-                <center><%= link_to image_tag("icons/16/page_white_text.png"), notification.notification_file.url, :target => '#', :title => "Editar" %></center>
+              <% if notification.intern_notification_file? %>
+                <center><%= link_to image_tag("icons/16/page_white_text.png"), notification.intern_notification_file.url, :target => '#', :title => "Editar" %></center>
               <% else %>
                 <center>-</center>
               <% end %>
             </td>
             <td style="width: 60px;">
               <% if current_user.admin? %>
-              <%= link_to image_tag("icons/16/cog.png"), edit_notification_path(notification), :title => "Editar" %>
+              <%= link_to image_tag("icons/16/cog.png"), edit_intern_notification_path(notification), :title => "Editar" %>
               <%= link_to image_tag("icons/16/trash.png"), notification, :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar" %>
               <% end %>
             </td>
@@ -49,7 +49,7 @@
 <% if current_user.admin? %>
 <div class="mws-panel grid_5">
   <div class="mws-panel-header">
-    <span class="mws-i-24 i-table-1">Añadir Notificación</span>
+    <span class="mws-i-24 i-table-1">Añadir Notificación de Régimen Interno</span>
   </div>
 
   <div class="mws-panel-body">
