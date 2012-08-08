@@ -12,7 +12,7 @@
 	    <div class="grid_3 link_respond">
 	    	<% if current_user.admin? %>
 	    		<%= link_to 'Editar', edit_dossier_register_path(@dossier, register), :class => "mws-button red small" %>
-	    		<%= link_to 'Eliminar', dossier_register_path(@dossier), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar", :class => "mws-button red small"  %>
+	    		<%= link_to 'Eliminar', dossier_register_path(@dossier, register), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar", :class => "mws-button red small"  %>
 	    	<% end %>
 	    </div>
 
