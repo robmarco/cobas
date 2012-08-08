@@ -61,4 +61,10 @@ class NotificationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def download
+    @notification = Notification.find(params[:id])
+    redirect_to @notification.notification_file.expiring_url(10)
+  end
+
 end

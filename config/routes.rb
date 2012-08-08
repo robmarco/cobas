@@ -4,7 +4,9 @@ Cobas::Application.routes.draw do
     get 'download', :on => :member
   end
   
-  resources :notifications, :except => [:new, :show]
+  resources :notifications, :except => [:new, :show] do
+    get 'download', :on => :member
+  end
 
   resources :dossiers do
     resources :registers, :except => [:index, :show]
