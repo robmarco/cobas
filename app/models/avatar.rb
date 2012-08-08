@@ -5,7 +5,7 @@ class Avatar < ActiveRecord::Base
   belongs_to :register
 
   has_attached_file :avatar, 
-  	:path => "register_files/:dossier_id/:register_id/:filename.:extension",
+  	:path => "register_files/#{self.dossier_id}/#{self.register_id}/:filename.:extension",
   	:storage => :s3,
     :s3_credentials => {
       :bucket            => ENV['S3_BUCKET_NAME'],
