@@ -12,7 +12,7 @@ Cobas::Application.routes.draw do
     resources :registers, :except => [:index, :show]
   end
 
-  match 'dossiers/:id/download/:avatar_id' => 'registers#download', :as => 'downlaod_register', :via => [:get]
+  match 'dossiers/:id/download/:avatar_id' => 'registers#download', :as => 'download_register', :via => [:get]
 
   match 'registers' => 'registers#index'
   get "files/index"
