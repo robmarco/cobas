@@ -64,6 +64,7 @@ class InternNotificationsController < ApplicationController
   end
 
   def download
+    @intern_notification = InternNotification.find(params[:id])
     redirect_to @intern_notification.intern_notification_file.expiring_url(10)
   end
 end
