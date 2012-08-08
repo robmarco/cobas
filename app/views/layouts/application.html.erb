@@ -56,12 +56,12 @@
         <!-- Main Navigation -->
         <div id="mws-navigation">
           <ul>
-            <li><%= link_to 'Expedientes', dossiers_path, :class => "mws-i-24 i-file-cabinet" %></li>
+            <li><%= link_to 'Expedientes', dossiers_path, :class => "mws-i-24 i-locked-folder" %></li>
             <li><%= link_to 'Régimen Int.', intern_notifications_path, :class => "mws-i-24 i-file-cabinet" %></li>
-            <li><%= link_to 'Notificaciones', notifications_path, :class => "mws-i-24 i-day-calendar" %></li>
+            <li><%= link_to 'Notificaciones', notifications_path, :class => "mws-i-24 i-book-bookmark" %></li>
             <% if current_user.admin? %>
               <li>
-                <%= link_to 'Usuarios', userlists_index_path, :class => "mws-i-24 i-file-cabinet" %>
+                <%= link_to 'Usuarios', userlists_index_path, :class => "mws-i-24 i-group-2" %>
               </li>
             <% end %>
           </ul>
