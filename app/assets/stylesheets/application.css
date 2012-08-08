@@ -67,8 +67,9 @@ ul.mws-summary li {
 }
 
 ul.mws-summary li span {
-	margin-left: 20px;
+	margin-left: 50px;
 	text-align: left;
+  font-size: 22px;
 }
 
 div.mws-form-row.files_row > h4 { 
