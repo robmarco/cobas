@@ -4,6 +4,14 @@ class Avatar < ActiveRecord::Base
   
   belongs_to :register
 
+  Paperclip.interpolates :dossier_id do |attachment, style|
+  	attachment.instance.dossier_id
+	end
+
+	Paperclip.interpolates :register_id do |attachment, style|
+	  attachment.instance.register.id
+	end
+
   has_attached_file :avatar, 
   	:path => "register_files/:dossier_id/:register_id/:filename.:extension",
   	:storage => :s3,
