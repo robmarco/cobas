@@ -22,7 +22,7 @@
 						<td>
 							<%= link_to "E#{file.dossier_id}ID#{file.register.id}", dossier_path(file.dossier_id)+"#register_id#{file.register.id}", :class => "file_link" %>
 						</td>
-						<td><%= link_to file.avatar_file_name, file.avatar.url, :class => "file_link", :target => '#' %></td>
+						<td><%= link_to file.avatar_file_name, download_register_path(file.dossier_id, file), :class => "file_link", :target => '#' %></td>
 						<td><%= number_to_human_size file.avatar_file_size %></td>
 						<td><%= file.created_at.strftime("%d/%m/%Y") %></td>
 					</tr>	
