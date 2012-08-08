@@ -26,7 +26,7 @@
             </td>
             <td style="width:10px;">
               <% if notification.intern_notification_file? %>
-                <center><%= link_to image_tag("icons/16/page_white_text.png"), notification.intern_notification_file.url, :target => '#', :title => "Editar" %></center>
+                <center><%= link_to image_tag("icons/16/page_white_text.png"), download_intern_notification_path(notification), :target => '#', :title => "Editar" %></center>
               <% else %>
                 <center>-</center>
               <% end %>

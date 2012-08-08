@@ -15,6 +15,7 @@ class Avatar < ActiveRecord::Base
   has_attached_file :avatar, 
   	:path => "register_files/:dossier_id/:register_id/:filename.:extension",
   	:storage => :s3,
+    :s3_permissions => :private,
     :s3_credentials => {
       :bucket            => ENV['S3_BUCKET_NAME'],
       :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],

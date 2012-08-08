@@ -62,4 +62,8 @@ class InternNotificationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def download
+    redirect_to @intern_notification.intern_notification_file.expiring_url(10)
+  end
 end

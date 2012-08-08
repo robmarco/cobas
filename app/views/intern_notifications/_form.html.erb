@@ -49,7 +49,7 @@
 
       <% if @intern_notification.intern_notification_file? %>
       <div class="mws-form-row">
-        <p class="file_added"><%= link_to "#{f.object.intern_notification_file_file_name}", '#' %></p>
+        <p class="file_added"><%= link_to "#{f.object.intern_notification_file_file_name}", download_intern_notification_path(notification), :target => "#" %></p>
       </div>
       <% end %>
 

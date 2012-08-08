@@ -1,6 +1,9 @@
 Cobas::Application.routes.draw do
 
-  resources :intern_notifications, :except => [:new, :show]
+  resources :intern_notifications, :except => [:new, :show] do 
+    get 'download', :on => :member
+  end
+  
   resources :notifications, :except => [:new, :show]
 
   resources :dossiers do
