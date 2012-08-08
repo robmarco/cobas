@@ -63,7 +63,7 @@
     <div class="mws-form-row">
     <%= f.fields_for :avatars do |a| %>
       <% unless a.object.new_record? %>        
-            <p class="file_added"><%= link_to "#{a.object.avatar_file_name}", a.object.avatar.url %> (<%= a.check_box :_destroy %> Eliminar)</p>
+            <p class="file_added"><%= link_to "#{a.object.avatar_file_name}", download_register_path(@dossier,file), :target => "#" %> (<%= a.check_box :_destroy %> Eliminar)</p>
       <% end %>
     <% end %>
     </div>
