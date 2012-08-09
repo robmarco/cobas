@@ -1,4 +1,4 @@
-<h3># E<%= @dossier.id %> - Expediente <%= @dossier.title %> - Estado: Abierto</h3>
+<h3># E<%= @dossier.id %> - Expediente <%= @dossier.title %> - Estado: <%= @dossier.state %></h3>
 <hr>
 <br>
 
@@ -61,12 +61,29 @@
 	      </li>
 	      <li>
 	        <div class="grid_2 li_element">Plazo respuesta</div>
-	        <div class="grid_6"><span><%= register.time_respond %> días</span></div>
+	        <div class="grid_6">
+	        	<span>
+	        		<% if register.time_respond == -1 %>
+	        			Sin plazo
+	        		<% else %>
+	        			<%= register.time_respond %> días
+	        		<% end %>
+	        	</span>
+	        </div>
 	      </li>
 	      <li>
 	        <div class="grid_2 li_element">Faltan</div>
 	        <div class="grid_6">
-            <%= raw days_until_response_sidebar(register.time_respond) %>
+	        	<% if register.responded? %>
+	        		<% if register.days_until_respond == 0 %>
+	        			<span class='sidebar red_flag'>Expirado</span>
+	        		<% else %>
+	        			<span class='sidebar green_flag'>Respondido</span>
+	        		<% end %>
+	        		
+	        	<% else %>
+            	<%= raw days_until_response_sidebar(register.days_until_respond) %>
+            <% end %>
 	        </div>
 	      </li>
 	    </ul>
@@ -80,9 +97,11 @@
   <%= link_to 'Ir a Listado Expedientes', dossiers_path, :class => "mws-report-2 mws-button red medium" %> 
 
   <% if current_user.admin? %>
-  <%= link_to 'Editar', edit_dossier_path(@dossier), :class => "mws-report-2 mws-button red medium" %> 
-  <%= link_to 'Añadir Escrito a Expediente', new_dossier_register_path(@dossier), :class => "mws-report-2 mws-button red medium" %> 
-  <%= link_to 'Eliminar Expediente', dossier_path(@dossier), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar", :class => "mws-report-2 mws-button gray medium" %> 
+	  <%= link_to 'Editar', edit_dossier_path(@dossier), :class => "mws-report-2 mws-button red medium" %> 
+	  <% if @dossier.state.eql?"Abierto" %>
+	  <%= link_to 'Añadir Escrito a Expediente', new_dossier_register_path(@dossier), :class => "mws-report-2 mws-button red medium" %> 
+	  <% end %>
+	  <%= link_to 'Eliminar Expediente', dossier_path(@dossier), :method => "delete", :confirm => "¿Estás seguro?", :title => "Eliminar", :class => "mws-report-2 mws-button gray medium" %> 
   <% end %>
 </div>
 

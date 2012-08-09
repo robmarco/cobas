@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808001326) do
+ActiveRecord::Schema.define(:version => 20120808234411) do
 
   create_table "avatars", :force => true do |t|
     t.string   "avatar_file_name"
@@ -61,10 +61,11 @@ ActiveRecord::Schema.define(:version => 20120808001326) do
     t.text     "description"
     t.string   "number_enter"
     t.integer  "time_respond"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "dossier_id"
     t.string   "type_document"
+    t.boolean  "responded",     :default => false
   end
 
   create_table "users", :force => true do |t|

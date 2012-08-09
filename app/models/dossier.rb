@@ -7,7 +7,7 @@ class Dossier < ActiveRecord::Base
   has_many :registers, :dependent => :destroy
 
 	def recent_register
-		self.registers.order("date_register DESC").limit(1)	  	
+		self.registers.order("date_register DESC").limit(1).first 	
 	end  
 
   private

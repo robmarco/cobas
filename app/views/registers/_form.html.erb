@@ -54,6 +54,14 @@
         <%= f.select :time_respond, [['Respuesta en 15 días', '15'], ['Respuesta en 30 días', '30'], ['Respuesta en 90 días', '90'], ['No necesita respuesta', '-1']] %>
       </div>
     </div>        
+    <% if params[:action].eql?"edit" %>
+    <div class="mws-form-row">
+      <%= f.label :responded, "Respondido" %>
+      <div class="mws-form-item small">
+        <%= f.select :responded, [['Sí', true], ['No', false]] %>
+      </div>
+    </div>        
+    <% end %>
 
     <hr>
     <div class="mws-form-row files_row">

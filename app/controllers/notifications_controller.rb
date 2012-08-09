@@ -1,7 +1,7 @@
 # coding: utf-8
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_authorize!, :except => [:index]
+  before_filter :admin_authorize!, :except => [:index, :download]
 
   # GET /notifications
   # GET /notifications.json

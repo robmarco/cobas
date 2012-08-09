@@ -1,6 +1,6 @@
 class RegistersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_authorize!, :except => [:index]
+  before_filter :admin_authorize!, :except => [:index, :download]
 
   def index
     @registers = Register.all
