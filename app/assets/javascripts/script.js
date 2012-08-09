@@ -5,6 +5,11 @@ $(function(){
 		"iDisplayLength": 25
 	});
 
+	$('.mws-datatable-fn2').dataTable({
+		"aaSorting": [[2, "asc"], [4, "asc"]],
+		"iDisplayLength": 50
+	});
+
 	/* Validation Plugin */
 	
 	$("#mws-validate").validate({

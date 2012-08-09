@@ -6,7 +6,7 @@
   </div>
   
   <div class="mws-panel-body">
-    <table class="mws-datatable-fn mws-table">
+    <table class="mws-datatable-fn2 mws-table">
       <thead>
         <tr>
           <th style="width: 30px;">ID</th>
@@ -30,10 +30,12 @@
             <td style="width: 50px;"><%= d.state %></td>
             <td style="width: 50px;">
               <% if d.state.eql?"Abierto" %>
-                <% if d.recent_register.time_respond == -1 %>
-                  Sin plazo
-                <% else %>
-                  <center><%= d.recent_register.time_respond %> días</center>
+                <% if !d.recent_register.nil? %>
+                  <% if d.recent_register.time_respond == -1 %> 
+                    Sin plazo
+                  <% else %>
+                    <center><%= d.recent_register.time_respond %> días</center>
+                  <% end %>
                 <% end %>
               <% else %>
                 <center>-</center>
@@ -41,7 +43,9 @@
             </td>
             <td style= "width: 60px;"> 
               <% if d.state.eql?"Abierto" %>
-                <%= raw days_until_response_text d.recent_register.days_until_respond %>
+                <% if !d.recent_register.nil? %>
+                  <%= raw days_until_response_text d.recent_register.days_until_respond %>
+                <% end %>
               <% else %>
                 <center>-</center>
               <% end %>
